@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CashAcceptor.Accept">
-    <Position X="4.75" Y="3" Width="1.5" />
+    <Position X="8.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAgAAAAIAAgAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAEAAAABAAAAAA=</HashCode>
       <FileName>Accept.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashAcceptor.Cashacceptor">
-    <Position X="0.5" Y="4.25" Width="2.25" />
+    <Position X="3.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAQAAAABAAGAAIAAAACAIIgAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <HashCode>AAQAAACAAAAAAIAAAACAIIgAAAAAAAAGIAGAAAAAAAA=</HashCode>
       <FileName>Cashacceptor.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="1.3" />
   </Class>
   <Class Name="CashAcceptor.ConvertHelper">
     <Position X="0.5" Y="0.5" Width="2.25" />
@@ -22,24 +21,24 @@
       <FileName>ConvertHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CashAcceptor.Events">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+  <Class Name="CashAcceptor.Events" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAAAAAA=</HashCode>
       <FileName>Events.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashAcceptor.Request">
-    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="3.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAIAACEAAAACIAAAADAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <HashCode>AIAAAACEAAAABIAAAACAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Request.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashAcceptor.Response">
-    <Position X="6.5" Y="3.5" Width="2.25" />
+    <Position X="6" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AIQAwRAQEckQEBEIgDCAAIAgggAQgAJAEAAAQAAEAAE=</HashCode>
+      <HashCode>AIAAQRAQEUkQEBEIADCAAAAgggAQgAJAEAAAQAAAAAE=</HashCode>
       <FileName>Response.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -50,12 +49,5 @@
       <FileName>SerialPortHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="CashAcceptor.IDevicesHelper">
-    <Position X="3" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAABAAAAAIAAAACAAIgAAAAAAAAAAAAAACAAAAA=</HashCode>
-      <FileName>DevicesHelper.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

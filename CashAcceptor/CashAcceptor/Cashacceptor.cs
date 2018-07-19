@@ -7,128 +7,147 @@ using System.IO.Ports;
 
 namespace CashAcceptor
 {
-    public class Cashacceptor : SerialPortHelper, IDevicesHelper
+    /// <summary>
+    /// cash acceptor class
+    /// </summary>
+    public class Cashacceptor : SerialPortHelper
     {
-        /**
-        * event delegate.
-        * Declare the event using EventHandler<T>
-        **/
-        public event EventHandler<Events> RaiseEvents;
-
-        /**
-         * delegate method handle raise event
-         **/
-        protected virtual void OnRaiseEvent(Events e)
+        /// <summary>
+        /// Initial command cash acceptor
+        /// </summary>
+        private Cashacceptor()
         {
-            RaiseEvents?.Invoke(this, e);
+            new Request
+            {
+                Enabled = "3E",
+                Disabled = "5E",
+                Accept = "0C",
+                Reset = "30",
+                Initial = "02"
+            };
         }
-        /**Initialzed**/
+        /// <summary>
+        /// Declare the event using EventHandler
+        /// </summary>
+        public event EventHandler<Events> MessageEvents;
+        /// <summary>
+        /// Declare the event using EventHandler cash acceptor.
+        /// </summary>
+        public event EventHandler<Events> CashAccept;
+        /// <summary>
+        /// delegate method handle raise event
+        /// </summary>
+        /// <param name="e">message</param>
+        protected virtual void OnMessage(Events e)
+        {
+            MessageEvents?.Invoke(this, e);
+        }
+        /// <summary>
+        /// delegate method handle cash accept event
+        /// </summary>
+        /// <param name="e">serial data received</param>
+        protected virtual void OnAccept(Events e)
+        {
+            CashAccept?.Invoke(this, e);
+        }
         private SerialPort _serialPort = new SerialPort();
-        Response status;
-
-        public Response Connect()
+        Accept accept;
+        /// <summary>
+        /// Connect to Devices.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public Boolean Connect()
         {
-            status = new Response();
+            bool result = false;
             try
             {
-
+                _serialPort = Initial();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.DataReceived += _serialPortDataReceived;
+                }
             }
             catch (Exception ex)
             {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
+                OnMessage(new Events(ex.Message));
             }
-            return status;
+            return result;
         }
 
-        public Response Disabled()
+        private void _serialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            status = new Response();
-            try
-            {
+            /*something code*/
 
-            }
-            catch (Exception ex)
-            {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
-            }
-            return status;
+            OnAccept(new Events("received cash"));
         }
-
-        public Response Disconnect()
+        /// <summary>
+        /// Disabled devices.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public Boolean Disabled()
         {
-            status = new Response();
+            bool result = false;
             try
             {
 
             }
             catch (Exception ex)
             {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
+                OnMessage(new Events(ex.Message));
             }
-            return status;
+            return result;
         }
-
-        public Response Enabled()
+        /// <summary>
+        /// Disconnect devices.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public Boolean Disconnect()
         {
-            status = new Response();
+            bool result = false;
             try
             {
 
             }
             catch (Exception ex)
             {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
+                OnMessage(new Events(ex.Message));
             }
-            return status;
+            return result;
         }
-
-        public Response Parallel(string command)
+        /// <summary>
+        /// Enabled Devices.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public Boolean Enabled()
         {
-            status = new Response();
+            bool result = false;
             try
             {
 
             }
             catch (Exception ex)
             {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
+                OnMessage(new Events(ex.Message));
             }
-            return status;
+            return result;
         }
-
-        public Response Received()
+        /// <summary>
+        /// Send command to devices.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>object</returns>
+        public Accept Transmitte(string command)
         {
-            status = new Response();
+            accept = new Accept();
             try
             {
 
             }
             catch (Exception ex)
             {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
+                OnMessage(new Events(ex.Message));
             }
-            return status;
-        }
-
-        public Response Transmitte(string command)
-        {
-            status = new Response();
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                status.Fault = ex.Message;
-                OnRaiseEvent(new Events(status.Fault));
-            }
-            return status;
+            return accept;
         }
     }
 }

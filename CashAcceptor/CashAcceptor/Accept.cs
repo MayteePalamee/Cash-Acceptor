@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace CashAcceptor
 {
+
     public class Accept
     {
-        private String code;
+        private String state;
         private String description;
 
-        public String Code
+        public String State
         {
-            get { return code; }
-            set { code = value; }
+            get { return state; }
+            set { state = value; }
         }
         public String Description
         {
