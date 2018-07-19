@@ -51,7 +51,7 @@
     <Compile Include="SerialPortHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CashAcceptorDiagram.cd" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

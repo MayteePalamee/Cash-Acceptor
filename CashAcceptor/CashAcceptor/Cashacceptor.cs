@@ -25,6 +25,36 @@ namespace CashAcceptor
                 Reset = "30",
                 Initial = "02"
             };
+            new Response
+            {
+                /*
+                 cash
+                 */
+                Begin = "808F",
+                Twenty = "8140",
+                Fifty = "8141",
+                Hundred = "8142",
+                FiveHundred = "8143",
+                Thousand = "8184",
+                /*
+                 exception
+                 */
+                 Poweroff = "00",
+                 Success = "10",
+                 MotorFailure = "20",
+                 CheckSumError = "21",
+                 BillJam = "22",
+                 BillRemove = "23",
+                 StackerOpen = "24",
+                 SensorProblem = "25",
+                 BillFish = "27",
+                 BillReject = "29",
+                 Invalid = "2A",
+                 Reserved = "2E",
+                 Exclusion = "2F",
+                 Ready = "3E",
+                 Unavailable = "5E"
+            };
         }
         /// <summary>
         /// Declare the event using EventHandler
@@ -52,6 +82,8 @@ namespace CashAcceptor
         }
         private SerialPort _serialPort = new SerialPort();
         Accept accept;
+        Request req;
+        Response res;
         /// <summary>
         /// Connect to Devices.
         /// </summary>
@@ -78,7 +110,7 @@ namespace CashAcceptor
         {
             /*something code*/
 
-            OnAccept(new Events("received cash"));
+            OnAccept(new Events(res.Unavailable));
         }
         /// <summary>
         /// Disabled devices.

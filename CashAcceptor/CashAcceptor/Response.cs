@@ -26,6 +26,70 @@ namespace CashAcceptor
         private String motorFailure;
         private String success;
         private String poweroff;
+
+        private String thousand;
+        private String fiveHundred;
+        private String hundred;
+        private String fifty;
+        private String twenty;
+        private String begin;
+        private String other;
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Other
+        {
+            get { return other; }
+            set { other = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Thousand
+        {
+            get { return thousand; }
+            set { thousand = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public String FiveHundred
+        {
+            get { return fiveHundred; }
+            set { fiveHundred = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Hundred
+        {
+            get { return hundred; }
+            set { hundred = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Fifty
+        {
+            get { return fifty; }
+            set { fifty = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Twenty
+        {
+            get { return twenty; }
+            set { twenty = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Begin
+        {
+            get { return begin; }
+            set { begin = value; }
+        }
         /// <summary>
         /// 
         /// </summary>
