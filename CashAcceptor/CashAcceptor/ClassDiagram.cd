@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CashAcceptor.Cashacceptor">
-    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Position X="2.75" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAQAAACAAAAAAIAAAACAIIgAAAAAAAAGIAGAAAAAAAA=</HashCode>
+      <HashCode>AAQAAACAAAAAAIAAAAKAIIgAAAAAAAAGIAGAAAAAAAA=</HashCode>
       <FileName>Cashacceptor.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
   <Class Name="CashAcceptor.Response">
     <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AoAAQRMQEUkREBEIADCAAAAwggAQkgJgEBIAYAAQAAE=</HashCode>
+      <HashCode>BoAAQRMQEUkREBEIADCAAAAwggAQkgJgEBIAYAQQAAE=</HashCode>
       <FileName>Response.cs</FileName>
     </TypeIdentifier>
   </Class>
