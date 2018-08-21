@@ -6,9 +6,9 @@ namespace CashReceiver
     /// <summary>
     /// cash acceptor class
     /// </summary>
-    public class Cashreceiver : SerialPortHelper
+    public class CashReceiver : SerialPortHelper
     {
-        private string _invoke = "";
+        private CashState _invoke = CashState.Unknown;
         //Acknowledge event
         private delegate string _acknowledge(String e);
         private event _acknowledge _accept;
@@ -26,14 +26,14 @@ namespace CashReceiver
         /// <summary>
         /// Declare the event using EventHandler cash acceptor.
         /// </summary>
-        public event EventHandler<CashEvent> Receiver;
+        public event EventHandler<CashEvent> Received;
         /// <summary>
         /// delegate method handle cash accept event
         /// </summary>
         /// <param name="e">serial data received</param>
         protected virtual void OnReceive(CashEvent e)
         {
-            Receiver?.Invoke(this, e);
+            Received?.Invoke(this, e);
         }
 
         private SerialPort _serialPort = new SerialPort();
@@ -80,11 +80,12 @@ namespace CashReceiver
         /// Enabled Devices.
         /// </summary>
         /// <returns>Command 3E return status</returns>
-        public String Open()
+        public CashState Open()
         {
             Byte[] data = { };
             try
             {
+                _serialPort.DataReceived -= _serialPortDataReceived;
                 if (!_serialPort.IsOpen)
                 {
                     _serialPort.Open();
@@ -99,7 +100,7 @@ namespace CashReceiver
 
                     Thread.Sleep(100);
                     CallbackState();
-                    if (_invoke.Equals(CashStatus.Ready.ToString()))
+                    if (_invoke.Equals(CashState.Ready))
                     {
                         _serialPort.DataReceived += _serialPortDataReceived;
                     }
@@ -107,7 +108,11 @@ namespace CashReceiver
             }
             catch (Exception exception)
             {
-                _serialPort.Close();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _invoke = CashState.Unavailable;
                 Console.WriteLine("exception : " + exception);
             }
             return _invoke;
@@ -117,11 +122,11 @@ namespace CashReceiver
         /// Disabled devices.
         /// </summary>
         /// <returns>Boolean</returns>
-        public String Close()
+        public CashState Close()
         {
             Byte[] data = { };
             try
-            {
+            { 
                 if (!_serialPort.IsOpen)
                 {
                      _serialPort.Open();
@@ -132,17 +137,21 @@ namespace CashReceiver
                     data = ConvertHexToByte("5E");
                     _serialPort.Write(data, 0, data.Length);
                     //Initial state
-                    _accept += Acknowledge;
                     Thread.Sleep(100);
                     CallbackState();
                 }
+                
                 _serialPort.DiscardOutBuffer();
                 _serialPort.DiscardInBuffer();
                 _serialPort.Close();
             }
             catch (Exception exception)
             {
-                _serialPort.Close();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _invoke = CashState.Unavailable;
                 Console.WriteLine("exception : " + exception);
             }
             _accept -= Acknowledge;
@@ -154,7 +163,7 @@ namespace CashReceiver
         /// current status device
         /// </summary>
         /// <returns>string status</returns>
-        public String CurrentStatus()
+        public CashState CurrentStatus()
         {
             byte[] data = { };
             try
@@ -172,7 +181,11 @@ namespace CashReceiver
             }
             catch (Exception exception)
             {
-                _serialPort.Close();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _invoke = CashState.Unavailable;
                 Console.WriteLine("exception : " + exception);
             }
             Console.WriteLine("current state : " + _invoke);
@@ -248,7 +261,11 @@ namespace CashReceiver
             }
             catch(Exception exception)
             {
-                _serialPort.Close();
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _invoke = CashState.Unavailable;
                 Console.WriteLine("exception : " + exception);
             }
         }
@@ -259,28 +276,28 @@ namespace CashReceiver
             switch (data.ToUpper())
             {
                 case "00" :
-                    _invoke = CashStatus.Poweroff.ToString();
+                    _invoke = CashState.Poweroff;
                     break;
                 case "20":
-                    _invoke = CashStatus.MotorFailure.ToString();
+                    _invoke = CashState.MotorFailure;
                     break;
                 case "21":
-                    _invoke = CashStatus.CheckSumError.ToString();
+                    _invoke = CashState.CheckSumError;
                     break;
                 case "22":
-                    _invoke = CashStatus.BillJam.ToString();
+                    _invoke = CashState.BillJam;
                     break;
                 case "23":
-                    _invoke = CashStatus.BillRemove.ToString();
+                    _invoke = CashState.BillRemove;
                     break;
                 case "24":
-                    _invoke = CashStatus.StackerOpen.ToString();
+                    _invoke = CashState.StackerOpen;
                     break;
                 case "25":
-                    _invoke = CashStatus.SensorProblem.ToString();
+                    _invoke = CashState.SensorProblem;
                     break;
                 case "27":
-                    _invoke = CashStatus.BillFish.ToString();
+                    _invoke = CashState.BillFish;
                     break;
                 case "29":
                     Console.WriteLine("Bill Reject");
@@ -295,13 +312,13 @@ namespace CashReceiver
                     Console.WriteLine("Response when Error Status is Exclusion");
                     break;
                 case "3E":
-                    _invoke = CashStatus.Ready.ToString();
+                    _invoke = CashState.Ready;
                     break;
                 case "5E":
-                    _invoke = CashStatus.Unavailable.ToString();
+                    _invoke = CashState.Unavailable;
                     break;
                 default:
-                    _invoke = "";
+                    _invoke = CashState.Unknown;
                     break;
             }
         }

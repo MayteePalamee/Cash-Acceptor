@@ -16,7 +16,6 @@ namespace CashReceiver
         /// <returns></returns>
         protected SerialPort Initial(InitialPort init)
         {
-
             SerialPort _serialport = new SerialPort();
             _serialport.PortName = init.Comport;
             _serialport.BaudRate = init.BaudRate;

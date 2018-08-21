@@ -8,7 +8,7 @@ namespace CashReceiver
     public class CashEvent : EventArgs
     {
         private readonly String _message;
-        private int _state;
+        private CashState _state;
 
         /// <summary>
         /// setter message
@@ -21,7 +21,7 @@ namespace CashReceiver
         /// setter state
         /// </summary>
         /// <param name="state">data state</param>
-        public CashEvent(int state)
+        public CashEvent(CashState state)
         {
             _state = state;
         }
@@ -35,7 +35,7 @@ namespace CashReceiver
         /// <summary>
         /// getter state
         /// </summary>
-        public int State
+        public CashState State
         {
             get { return _state; }
         }

@@ -3,8 +3,12 @@
     /// <summary>
     /// Device Status
     /// </summary>
-    public enum CashStatus
+    public enum CashState
     {
+        /// <summary>
+        /// Initial
+        /// </summary>
+        Unknown = -1,
         /// <summary>
         /// Device Ready
         /// </summary>
