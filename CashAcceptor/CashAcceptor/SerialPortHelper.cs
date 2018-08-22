@@ -23,8 +23,6 @@ namespace CashReceiver
             _serialport.StopBits = StopBits.One;
             _serialport.DtrEnable = init.DtrEnable;
             _serialport.Parity = Parity.Even;
-            //_serialport.WriteTimeout = 500;
-            //_serialport.ReadTimeout = 500;
             _serialport.RtsEnable = true;
            
             return _serialport;
